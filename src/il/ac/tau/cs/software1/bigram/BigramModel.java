@@ -184,8 +184,45 @@ public class BigramModel {
      * @pre: fileName is a legal file path
      */
     public void loadModel(String fileName) throws IOException { // Question 4
-        // TODO: implemen
-    }
+        // read vocab from the file
+        BufferedReader vocReader = new BufferedReader(new FileReader(fileName + VOC_FILE_SUFFIX));
+        String firstLine = vocReader.readLine();
+        int vocalSize = Integer.parseInt(firstLine.split(" ")[0]);// turns the String to a Number as its int Value
+
+        String[] newVocabulary = new String[vocalSize];
+        for(int i = 0; i < vocalSize; i++){
+            String line = vocReader.readLine();
+            String[] parts = line.split(",");
+            int wordIndex = Integer.parseInt(parts[0]);
+            String word = parts[1];
+            newVocabulary[wordIndex] = word;
+        }
+        vocReader.close();
+        
+        int[][] newCount = new int[vocalSize][vocalSize];
+        BufferedReader countReader = new BufferedReader(new FileReader(fileName + COUNTS_FILE_SUFFIX));
+
+        String line = countReader.readLine();
+        while((line != null)){
+            String[] mainParts = line.split(":");
+            String[] indexes = mainParts[0].split(",");
+
+            int i1 = Integer.parseInt(indexes[0]);
+            int i2 = Integer.parseInt(indexes[1]); 
+            int count = Integer.parseInt(mainParts[1]);
+
+            newCount[i1][i2] = count;
+            line = countReader.readLine();
+        }
+        countReader.close();
+        
+        mVocabulary = newVocabulary;
+        mBigramCounts = newCount;
+
+        }
+
+        
+    
 
     /*
      * @pre: sentence is in lowercase
