@@ -174,7 +174,6 @@ public class BigramModel {
                     countWriter.newLine();
                 }
             }
-            
         }
         countWriter.close();
         
