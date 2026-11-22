@@ -12,15 +12,13 @@ public class PacmanBonusDot extends PacmanBonus {
 
 	// The two methods below belong to the Collectible interface (Question 8)
 
-	@Override
-	public float getWeight() {
-		// TODO: implement
-		return 0.f;
+	@Override 
+	public float getWeight(){
+		return 1.0f;
 	}
 
-	@Override
-	public float getPrice() {
-		// TODO: implement
-		return 0.f;
+	@Override 
+	public float getPrice(){
+		return 12.0f;
 	}
 }
